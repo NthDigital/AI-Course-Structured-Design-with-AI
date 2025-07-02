@@ -1,6 +1,143 @@
-## Development Task Breakdown
+# Restaurant Booking System - Development Task Breakdown
+
+## 📊 Project Overview
+- **Total Duration**: 31 weeks (7.75 months)
+- **Total GitHub Issues**: 34 detailed implementation tasks
+- **Team Size**: 2-4 senior developers
+- **Technology Stack**: .NET 9, PostgreSQL, React, Clean Architecture
+- **Development Approach**: Test-Driven Development (TDD) with enterprise-grade standards
+
+## 🏗️ Development Phases
+
+### Phase 1: Foundation (Weeks 1-8)
+Core infrastructure, authentication, and restaurant management
+
+### Phase 2: Booking Engine (Weeks 9-20)  
+Table management, scheduling, and reservation functionality
+
+### Phase 3: Advanced Features (Weeks 21-28)
+Enhanced customer experience and advanced booking features
+
+### Phase 4: Production Ready (Weeks 29-31)
+Performance optimization, monitoring, and security hardening
+
+---
+
+## 📋 Epic Breakdown
 
 ### Epic 1: Project Setup and Infrastructure
+**📋 [Detailed Epic Documentation](./Epic-1-Project-Setup-and-Infrastructure.md)**
+
+**Purpose**: Establish Clean Architecture foundation with PostgreSQL, JWT auth, and DI configuration  
+**Phase**: Foundation | **Duration**: 4 weeks (Sprint 1-2) | **Issues**: 6 | **Risk**: Medium
+
+**Key Outcomes**:
+- Clean Architecture project structure | Entity Framework Core + PostgreSQL | JWT authentication infrastructure | Database seeding and core entities
+
+---
+
+### Epic 2: User Authentication System
+**📋 [Detailed Epic Documentation](./Epic-2-User-Authentication-System.md)**
+
+**Purpose**: Secure user registration, login, and role-based authorization for owners and customers  
+**Phase**: Foundation | **Duration**: 3 weeks (Sprint 3) | **Issues**: 6 | **Risk**: High (Security Critical)
+
+**Key Outcomes**:
+- Owner/Customer registration & login | JWT + refresh token management | Role-based authorization | Account security features
+
+---
+
+### Epic 3: Restaurant CRUD Operations  
+**📋 [Detailed Epic Documentation](./Epic-3-Restaurant-CRUD-Operations.md)**
+
+**Purpose**: Restaurant creation, management, search functionality, and owner dashboards  
+**Phase**: Foundation | **Duration**: 3 weeks (Sprint 4) | **Issues**: 5 | **Risk**: Medium
+
+**Key Outcomes**:
+- Restaurant CRUD for owners | Public search with filtering | Restaurant details display | Owner dashboard analytics
+
+---
+
+### Epic 4: Table Management System
+**📋 [Detailed Epic Documentation](./Epic-4-Table-Management-System.md)**
+
+**Purpose**: Comprehensive table management with real-time status, analytics, and layout optimization  
+**Phase**: Booking Engine | **Duration**: 3 weeks (Sprint 5) | **Issues**: 4 | **Risk**: Medium
+
+**Key Outcomes**:
+- Table CRUD with capacity management | Real-time status tracking | Utilization analytics | Layout configuration
+
+---
+
+### Epic 5: Operating Hours Management
+**📋 [Detailed Epic Documentation](./Epic-5-Operating-Hours-Management.md)**
+
+**Purpose**: Flexible scheduling with special days, holidays, and complex time scenarios  
+**Phase**: Booking Engine | **Duration**: 2 weeks (Sprint 4) | **Issues**: 3 | **Risk**: Low
+
+**Key Outcomes**:
+- Weekly hours configuration | Hours validation service | Special days & holiday management | Multi-period support
+
+---
+
+### Epic 6: Availability Block System
+**📋 [Detailed Epic Documentation](./Epic-6-Availability-Block-System.md)**
+
+**Purpose**: Granular availability control for maintenance, events, and operational requirements  
+**Phase**: Booking Engine | **Duration**: 2 weeks (Sprint 6) | **Issues**: 3 | **Risk**: Medium
+
+**Key Outcomes**:
+- Block creation & management | Validation against reservations | Recurring block patterns | Conflict resolution
+
+---
+
+### Epic 7: Core Reservation Functionality
+**📋 [Detailed Epic Documentation](./Epic-7-Core-Reservation-Functionality.md)**
+
+**Purpose**: Essential booking system with customer search, booking, and restaurant management tools  
+**Phase**: Booking Engine | **Duration**: 4 weeks (Sprint 7-8) | **Issues**: 3 | **Risk**: High (Complex Logic)
+
+**Key Outcomes**:
+- Customer booking & search | Restaurant reservation dashboard | Business rules engine | Table assignment optimization
+
+---
+
+### Epic 8: Advanced Reservation Features  
+**📋 [Detailed Epic Documentation](./Epic-8-Advanced-Reservation-Features.md)**
+
+**Purpose**: Enhanced customer experience with waitlists, group bookings, and recurring reservations  
+**Phase**: Advanced Features | **Duration**: 4 weeks (Sprint 9-10) | **Issues**: 3 | **Risk**: Medium
+
+**Key Outcomes**:
+- Waitlist management system | Group reservation coordination | Recurring booking patterns | VIP customer features
+
+---
+
+### Epic 9: Performance and Polish
+**📋 [Detailed Epic Documentation](./Epic-9-Performance-and-Polish.md)**
+
+**Purpose**: Production-ready performance, monitoring, security hardening, and scalability  
+**Phase**: Production Ready | **Duration**: 4 weeks (Sprint 11-12) | **Issues**: 3 | **Risk**: Medium
+
+**Key Outcomes**:
+- Comprehensive caching strategy | Production monitoring & error handling | API security & rate limiting | Performance optimization
+
+---
+
+## 📅 Sprint Timeline
+
+| Sprint | Weeks | Epic(s) | Focus Area |
+|--------|-------|---------|------------|
+| 1-2 | 1-4 | Epic 1 | Infrastructure Foundation |
+| 3 | 5-7 | Epic 2 | Authentication System |
+| 4 | 8-10 | Epic 3 + Epic 5 | Restaurant Management |
+| 5 | 11-13 | Epic 4 | Table Management |
+| 6 | 14-15 | Epic 6 | Availability Controls |
+| 7-8 | 16-23 | Epic 7 | Core Reservations |
+| 9-10 | 24-31 | Epic 8 | Advanced Features |
+| 11-12 | 32-39 | Epic 9 | Production Polish |
+
+**Total Estimated Duration**: 31 weeks (7.75 months)
 **📋 [Detailed Epic Documentation](./Epic-1-Project-Setup-and-Infrastructure.md)**
 
 **Overview**: Establish the foundational architecture, infrastructure, and core services required for the restaurant booking system. This epic focuses on setting up Clean Architecture principles, Entity Framework Core with PostgreSQL, JWT authentication infrastructure, and comprehensive dependency injection configuration.
@@ -191,118 +328,22 @@
 
 **Total Estimated Duration**: 31 weeks (7.75 months)
 
-### Sprint Planning Guidelines
-- **Sprint Length**: 2-3 weeks each
-- **Velocity Assumption**: 1-2 complex GitHub issues per sprint (given TDD requirements)
-- **Team Size**: 2-3 senior developers
-- **Includes**: Comprehensive testing, code reviews, documentation, security reviews
-- **Buffer**: 15% contingency built into estimates for unforeseen complexity
-
-### Definition of Done
-
-#### Code Quality & Architecture
-- [ ] Code implemented following Clean Architecture principles with proper layer separation
-- [ ] Domain entities encapsulate business logic and validation rules
-- [ ] Repository interfaces defined in Core layer, implementations in Infrastructure layer
-- [ ] Dependency injection properly configured with appropriate service lifetimes
-- [ ] No circular dependencies between layers
-- [ ] SOLID principles applied throughout the codebase
-
-#### Test-Driven Development (TDD)
-- [ ] **Unit tests written first** following Red-Green-Refactor cycle
-- [ ] **Comprehensive test coverage**: Minimum 90% code coverage for business logic
-- [ ] **Test categories**: Unit tests, integration tests, performance tests, security tests
-- [ ] **Entity tests**: 100% coverage for domain entities and value objects
-- [ ] **Service tests**: All business logic tested in isolation with mocked dependencies
-- [ ] **API tests**: End-to-end integration tests for all endpoints
-- [ ] **Edge case tests**: Boundary conditions, null values, invalid input scenarios
-- [ ] All tests are green and pass consistently
-
-#### API Design & Documentation
-- [ ] RESTful API endpoints follow consistent naming conventions
-- [ ] Comprehensive input validation with detailed error messages
-- [ ] Proper HTTP status codes for all response scenarios
-- [ ] Request/Response DTOs with complete validation attributes
-- [ ] **OpenAPI/Swagger documentation** generated and up-to-date
-- [ ] API versioning strategy implemented
-- [ ] Rate limiting and throttling configured
-- [ ] CORS policies properly configured
-
-#### Security Implementation
-- [ ] **Authentication**: JWT tokens with proper claims and expiration
-- [ ] **Authorization**: Role-based and resource-based policies implemented
-- [ ] **Password security**: BCrypt hashing with salt
-- [ ] **Account security**: Lockout mechanisms after failed attempts
-- [ ] **Token security**: Refresh token rotation and concurrent usage detection
-- [ ] **Security headers**: HSTS, CSP, X-Frame-Options, etc.
-- [ ] **Input sanitization**: Protection against injection attacks
-- [ ] **Security logging**: Authentication events and security violations tracked
-
-#### Performance & Scalability
-- [ ] **Multi-layer caching**: In-memory, Redis, and database query caching
-- [ ] **Cache invalidation**: Dependency-based invalidation strategies
-- [ ] **Database optimization**: Proper indexing and query optimization
-- [ ] **API response times**: Sub-200ms for cached data, sub-500ms for dynamic data
-- [ ] **Connection pooling**: Database connections properly managed
-- [ ] **Background processing**: Non-critical operations handled asynchronously
-- [ ] **Load testing**: System handles 1000+ concurrent users
-
-#### Error Handling & Monitoring
-- [ ] **Global exception handling**: Structured error responses with correlation IDs
-- [ ] **Comprehensive logging**: Structured logging with appropriate log levels
-- [ ] **Health checks**: All dependencies monitored (database, cache, external services)
-- [ ] **Performance monitoring**: Response times, memory usage, database metrics
-- [ ] **Error analytics**: Error rates, trends, and alerting configured
-- [ ] **Graceful degradation**: System remains functional during partial failures
-
-#### Database & Data Management
-- [ ] **Entity Framework migrations**: All schema changes properly versioned
-- [ ] **Database seeding**: Sample data for development and testing environments
-- [ ] **Data validation**: Entity-level validation enforced at database level
-- [ ] **Audit trails**: Change tracking for critical business entities
-- [ ] **Transaction management**: Proper unit of work patterns implemented
-- [ ] **Database constraints**: Foreign keys, unique constraints, and check constraints
-
-#### Business Logic & Domain Rules
-- [ ] **Domain-driven design**: Business rules encapsulated in domain entities
-- [ ] **Business validation**: Comprehensive validation services with configurable rules
-- [ ] **Workflow management**: State transitions properly controlled and validated
-- [ ] **Business analytics**: Reporting and dashboard functionality implemented
-- [ ] **Data integrity**: Referential integrity maintained across all operations
-
-#### Code Review & Quality Gates
-- [ ] **Peer review**: Code reviewed by at least one senior developer
-- [ ] **Architecture review**: Changes reviewed for architectural compliance
-- [ ] **Security review**: Security implications assessed and approved
-- [ ] **Performance review**: Performance impact analyzed and acceptable
-- [ ] **Code quality tools**: Static analysis tools pass without critical issues
-- [ ] **Documentation review**: Technical documentation updated and accurate
-
-#### Deployment & Operations
-- [ ] **Environment configuration**: Settings externalized and environment-specific
-- [ ] **Infrastructure as Code**: Database migrations automated
-- [ ] **Deployment pipeline**: Automated build, test, and deployment process
-- [ ] **Rollback strategy**: Ability to revert changes if issues are discovered
-- [ ] **Monitoring setup**: Application monitoring and alerting configured
-- [ ] **Backup strategy**: Data backup and recovery procedures tested
-
-#### User Experience & Acceptance
-- [ ] **Functional requirements**: All acceptance criteria met and verified
-- [ ] **User stories**: Business value delivered as specified
-- [ ] **Error handling**: User-friendly error messages and graceful error handling
-- [ ] **Performance requirements**: System meets or exceeds performance targets
-- [ ] **Accessibility**: Basic accessibility requirements met (WCAG guidelines)
-- [ ] **Cross-browser compatibility**: Tested on major browsers and devices
-
-#### Documentation & Knowledge Transfer
-- [ ] **Technical documentation**: Architecture decisions documented (ADRs)
-- [ ] **API documentation**: Complete API reference with examples
-- [ ] **Deployment guides**: Step-by-step deployment instructions
-- [ ] **Troubleshooting guides**: Common issues and resolution steps
-- [ ] **Code comments**: Complex business logic properly commented
-- [ ] **README files**: Project setup and development instructions updated
-
 ---
 
-**Note**: This Definition of Done reflects enterprise-grade development standards appropriate for a production-ready restaurant booking system. Each checkbox represents a critical quality gate that must be satisfied before considering any feature "complete."
-- [ ] Deployed to development environment
+## 📋 Project Management Guidelines
+
+### Sprint Planning
+- **Sprint Length**: 2-3 weeks each
+- **Velocity**: 1-2 complex GitHub issues per sprint (TDD requirements)
+- **Team Size**: 2-3 senior developers (up to 4 for complex epics)
+- **Buffer**: 15% contingency for unforeseen complexity
+
+### Quality Standards
+All development follows enterprise-grade standards including:
+- Test-Driven Development (TDD) with 90%+ coverage
+- Clean Architecture with proper layer separation  
+- Comprehensive security implementation
+- Performance optimization and monitoring
+- Complete API documentation and error handling
+
+📄 **[Complete Definition of Done](./Definition-of-Done.md)** - Detailed quality checklist
