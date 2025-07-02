@@ -28,5 +28,3 @@
 - **Logging**: Serilog
 - **Testing**: xUnit, Moq
 - **CI/CD**: GitHub Actions
-
-## key Features
