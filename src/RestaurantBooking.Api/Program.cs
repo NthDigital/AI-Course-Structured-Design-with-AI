@@ -1,7 +1,14 @@
+using RestaurantBooking.Infrastructure.Extensions;
+using RestaurantBooking.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
+
+// Add infrastructure services (EF Core, Repositories, etc.)
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -46,5 +53,71 @@ app.MapGet("/test", () =>
     return Results.Ok(new { message = "API Working", status = "success", timestamp = DateTime.UtcNow });
 })
 .WithName("TestAPI");
+
+// Add database connection test endpoint
+app.MapGet("/test/database", async (RestaurantBookingDbContext dbContext) =>
+{
+    try
+    {
+        // Test database connection
+        var canConnect = await dbContext.Database.CanConnectAsync();
+        
+        if (canConnect)
+        {
+            // Get database info
+            var connectionString = dbContext.Database.GetConnectionString();
+            var provider = dbContext.Database.ProviderName;
+            
+            // Test a simple query
+            var restaurantOwnersCount = await dbContext.RestaurantOwners.CountAsync();
+            var restaurantsCount = await dbContext.Restaurants.CountAsync();
+            var tablesCount = await dbContext.Tables.CountAsync();
+            var customersCount = await dbContext.Customers.CountAsync();
+            var reservationsCount = await dbContext.Reservations.CountAsync();
+            var operatingHoursCount = await dbContext.OperatingHours.CountAsync();
+            var availabilityBlocksCount = await dbContext.AvailabilityBlocks.CountAsync();
+            
+            return Results.Ok(new
+            {
+                status = "success",
+                message = "Database connection successful",
+                database = new
+                {
+                    connectionString = connectionString?.Replace("Password=", "Password=***"), // Hide password for security
+                    provider = provider,
+                    canConnect = canConnect
+                },
+                data = new
+                {
+                    restaurantOwnersCount,
+                    restaurantsCount,
+                    tablesCount,
+                    customersCount,
+                    reservationsCount,
+                    operatingHoursCount,
+                    availabilityBlocksCount
+                },
+                timestamp = DateTime.UtcNow
+            });
+        }
+        else
+        {
+            return Results.Problem(
+                detail: "Could not connect to database",
+                statusCode: 500,
+                title: "Database Connection Failed"
+            );
+        }
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(
+            detail: ex.Message,
+            statusCode: 500,
+            title: "Database Connection Error"
+        );
+    }
+})
+.WithName("TestDatabase");
 
 app.Run();
