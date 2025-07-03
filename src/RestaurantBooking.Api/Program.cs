@@ -1,5 +1,6 @@
 using RestaurantBooking.Infrastructure.Extensions;
 using RestaurantBooking.Infrastructure.Data;
+using RestaurantBooking.Api.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,9 @@ builder.AddServiceDefaults();
 // Add infrastructure services (EF Core, Repositories, etc.)
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+// Add API services (Authentication, Authorization, Health Checks, Configuration, CORS)
+builder.Services.AddApiServices(builder.Configuration);
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -18,32 +22,30 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add authentication
-builder.Services.AddAuthentication().AddJwtBearer();
-builder.Services.AddAuthorization();
-
-// Add CORS
-builder.Services.AddCors();
-
-
 var app = builder.Build();
 
 // Map default health check endpoint
 app.MapDefaultEndpoints();
+
+// Map health check endpoint from our API services
+app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // Use development CORS policy
+    app.UseCors("DevelopmentPolicy");
+}
+else
+{
+    // Use production CORS policy
+    app.UseCors("ProductionPolicy");
 }
 
 app.UseHttpsRedirection();
-app.UseCors(static builder => 
-    builder.AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowAnyOrigin());
-
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -121,3 +123,6 @@ app.MapGet("/test/database", async (RestaurantBookingDbContext dbContext) =>
 .WithName("TestDatabase");
 
 app.Run();
+
+// Make the implicit Program class public so test projects can access it
+public partial class Program { }
